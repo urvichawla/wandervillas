@@ -1,10 +1,21 @@
 {
+  "engines":{
+    "node":"v18.14.0"
+  },
   "name": "majorproject",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "resolutions": {
+    "cloudinary": "^2.2.0"
+  },
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
