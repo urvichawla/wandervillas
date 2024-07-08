@@ -1,0 +1,165 @@
+
+<% layout("/layouts/boilerplate") %>
+<style>#filters{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    }
+    .filters{
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+        }
+        .filters:hover{
+            opacity: 1;
+            cursor: pointer;
+
+        }
+        .filters p{
+            font-size: 0.8rem;
+        }
+        #tax-info{
+            display: none;
+        }
+        .tax-toggle{
+            border: 1px solid black;
+            border-radius: 1rem;
+            height: 3.5rem;
+            padding: 1rem;
+            margin-left: 8rem;
+            display: flex;
+            align-items: center;
+
+        }
+        
+        
+        
+        </style>
+
+
+    <!-- <h3>All Listings</h3> -->
+    <!-- <form method="GET" action="/listings/new">
+        <button>create new route</button>
+    </form> -->
+    <div id="filters">
+        <div class="filters">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-bed"></i></i></div>
+                <p>Rooms</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Iconic cities</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>Castles</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Arctic</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-cow"></i></div>
+                <p>Farms</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-regular fa-snowflake"></i></div>
+                <p>Farms</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-igloo"></i></div>
+                <p>Domes</p>
+            </div>
+            <div class="filters">
+                <div><i class="fa-solid fa-sailboat"></i></div>
+                <p>Boats</p>
+            </div>
+            <div>
+                <div class="tax-toggle">
+                <div class="form-check-reverse form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+                 
+            </div>
+            </div>
+            </div>
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
+        <%for(let listing of allListings){ %>
+            <a href="/listings/<%=listing._id %> " class="listing-link">
+
+            <div class="card col listing-card" >
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;"/>
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <b><%= listing.title %></b><br/>
+                    &#8377;<%=listing.price.toLocaleString("en-In") %> / night
+                    <i class="tax-info"> &nbsp; &nbsp;+18 % GST</i>
+                </p>
+                
+                </div>
+                </div>
+            
+            </a>
+              
+              <% } %>
+
+    </div>
+    <script>
+        let taxswitch=document.getElementById("flexSwitchCheckDefault");
+        taxswitch.addEventListener("click",()=>{
+            let taxinfo=document.getElementsByClassName("tax-info");
+            for(info of taxinfo){
+                if(info.style.display!="inline"){
+                info.style.display="inline";
+                }
+                else{
+                    info.style.display="none";
+                }
+            }
+
+        })
+
+    </script>
+    <script>
+        // List of countries for demonstration purposes
+        const countries = ["United States","Italy", "Canada", "Australia", "India", "United Kingdom","Maldives","Thailand", "Indonesia", "United Arab Emirates"];
+      
+        // Populate the datalist with countries
+        const datalist = document.getElementById('country-list');
+        countries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country;
+          datalist.appendChild(option);
+        });
+      
+        // Handle form submission
+        document.querySelector('form[role="search"]').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const searchInput = document.getElementById('country-search').value;
+      
+          // Redirect to the listings page with the selected country as a query parameter
+          if (countries.includes(searchInput)) {
+            window.location.href = `/listings?country=${encodeURIComponent(searchInput)}`;
+          } else {
+            alert('Please select a valid country from the list.');
+          }
+        });
+      </script>
+      
+  
+
+
