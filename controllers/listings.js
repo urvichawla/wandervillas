@@ -10,6 +10,10 @@ const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
     
 //   }
+
+module.exports.showhomepage=(req,res)=>{
+  res.render("listings/index.ejs");
+}
 module.exports.index = async (req, res) => {
   const { country } = req.query;
   let query = {};

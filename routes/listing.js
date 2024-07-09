@@ -27,8 +27,11 @@ const validateListing=(req,res,next)=>{
     }
 
   };
+  
   router
   .route("/")
+  
+
   .get(wrapAsync(listingcontroller.index))
   .post(isloggedin,upload.single("listing[image]"),validateListing, wrapAsync(listingcontroller.createListing));
 

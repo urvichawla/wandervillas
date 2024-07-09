@@ -6,6 +6,7 @@ require('dotenv').config();
 //console.log(process.env.SECRET);
 const express=require("express");
 const app=express();
+const listingsRouter = require('./routes/listing.js'); 
 
 
 const path=require("path");
@@ -93,18 +94,21 @@ passport.deserializeUser(User.deserializeUser());
     next();
 
   })
+  app.use('/listings', listingsRouter); // Mount listings router
+
+// Root route
+app.get('/', (req, res) => {
+    res.render('listings/index.ejs');
+});
   // app.get("/demouser",async (req,res)=>{
   //   let fakeuser=new User({
   //     email: "student@gmail.com",
   //     username: "delta-student",
   //   })
-  //   let registereduser=await User.register(fakeuser,"helloworld");
+  //   let registereduser=await User.ressgister(fakeuser,"helloworld");
   //   res.send(registereduser);
   // })
-  app.get("/", (req, res) => {
-    res.render("index.ejs"); // Make sure you have a home.ejs file in your views directory
-  });
- 
+  
   app.use("/listings",listings);
   app.use("/listings/:id/reviews",reviews);
   app.use("/",user);
