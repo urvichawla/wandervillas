@@ -100,6 +100,18 @@ passport.deserializeUser(User.deserializeUser());
 app.get('/', (req, res) => {
     res.render('listings/index.ejs');
 });
+
+// trying new root routing -> check later -> done
+app.get('/', async (req, res) => {
+  try {
+      const allListings = await Listing.find({}); // checking if this works
+      res.render('listings/index', { allListings }); // umm come back to this later -> done
+  } catch (err) { // added error handling
+      console.error(err);
+      req.flash('error', 'Cannot retrieve listings');
+      res.redirect('/');
+  }
+});
   // app.get("/demouser",async (req,res)=>{
   //   let fakeuser=new User({
   //     email: "student@gmail.com",
