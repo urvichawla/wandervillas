@@ -97,9 +97,9 @@ passport.deserializeUser(User.deserializeUser());
   app.use('/listings', listingsRouter); // Mount listings router
 
 // Root route
-app.get('/', (req, res) => {
-    res.render('listings/index.ejs');
-});
+// app.get('/', (req, res) => {
+//     res.render('listings/index.ejs');
+// });
 
 // trying new root routing -> check later -> done
 app.get('/', async (req, res) => {
