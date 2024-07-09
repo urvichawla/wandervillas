@@ -101,6 +101,9 @@ passport.deserializeUser(User.deserializeUser());
   //   let registereduser=await User.register(fakeuser,"helloworld");
   //   res.send(registereduser);
   // })
+  app.get("/", (req, res) => {
+    res.render("index.ejs"); // Make sure you have a home.ejs file in your views directory
+  });
  
   app.use("/listings",listings);
   app.use("/listings/:id/reviews",reviews);
